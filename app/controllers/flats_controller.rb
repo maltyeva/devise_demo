@@ -1,5 +1,6 @@
 class FlatsController < ApplicationController
   before_action :set_flat, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   # GET /flats
   # GET /flats.json
@@ -25,6 +26,7 @@ class FlatsController < ApplicationController
   # POST /flats.json
   def create
     @flat = Flat.new(flat_params)
+    @flat.user = current_user #takes current logged in user and assigns the flat to them
 
     respond_to do |format|
       if @flat.save
@@ -62,13 +64,13 @@ class FlatsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_flat
-      @flat = Flat.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_flat
+    @flat = Flat.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def flat_params
-      params.require(:flat).permit(:name, :address, :user_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def flat_params
+    params.require(:flat).permit(:name, :address)
+  end
 end

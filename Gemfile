@@ -36,6 +36,10 @@ gem 'devise'
 
 gem 'faker'
 
+gem 'pundit'
+
+gem 'rest-client'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'

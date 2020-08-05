@@ -40,6 +40,8 @@ gem 'pundit'
 
 gem 'rest-client'
 
+gem 'geocoder'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
